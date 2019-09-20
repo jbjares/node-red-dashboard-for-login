@@ -40,7 +40,7 @@ module.exports = function(RED) {
         });
 
         node.on('input', function(msg) {
-            if (node.position !== "dialog" && node.sendall === true) { delete msg.socketid; }
+            //if (node.position !== "dialog" && node.sendall === true) { delete msg.socketid; }
             msg.payload = noscript(msg.payload);
             ui.emitSocket('show-toast', {
                 title: node.topic || msg.topic,
