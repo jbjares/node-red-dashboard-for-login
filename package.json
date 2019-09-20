@@ -1,5 +1,5 @@
 {
-    "name": "node-red-dashboard",
+    "name": "node-red-dashboard-for-login",
     "version": "2.16.3",
     "description": "A set of dashboard nodes for Node-RED",
     "keywords": [
@@ -45,7 +45,7 @@
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/paulo-leitao/node-red-dashboard.git"
+        "url": "https://github.com/paulo-leitao/node-red-dashboard-for-login.git"
     },
     "node-red": {
         "version": ">=0.14.0",
