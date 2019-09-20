@@ -1,5 +1,6 @@
 
 var inited = false;
+var singleUserOnly = false;  // === 
 
 module.exports = function(RED) {
     if (!inited) {
@@ -70,20 +71,34 @@ function toNumber(keepDecimals, config, input) {
     return isNaN(input) ? config.min : input;
 }
 
+//function emit(event, data) {
+//    io.emit(event, data);
+//}
 function emit(event, data) {
-    io.emit(event, data);
+    if ( singleUserOnly &&  data.socketid !== undefined ) io.emit(event, data); // SJ
+    else io.emit(event, data); // Display SingIn Form.  
 }
 
+//function emitSocket(event, data) {
+//    if (data.hasOwnProperty("msg") && data.msg.hasOwnProperty("socketid") && (data.msg.socketid !== undefined)) {
+//        io.to(data.msg.socketid).emit(event, data);
+//    }
+//    else if (data.hasOwnProperty("socketid") && (data.socketid !== undefined)) {
+//        io.to(data.socketid).emit(event, data);
+//    }
+//    else {
+//        io.emit(event, data);
+//    }
+//}
 function emitSocket(event, data) {
-    if (data.hasOwnProperty("msg") && data.msg.hasOwnProperty("socketid") && (data.msg.socketid !== undefined)) {
-        io.to(data.msg.socketid).emit(event, data);
+
+    if (data.hasOwnProperty("socketid") && (data.socketid !== undefined)) {
+        io.to(data.socketid).emit(event,data);
     }
-    else if (data.hasOwnProperty("socketid") && (data.socketid !== undefined)) {
-        io.to(data.socketid).emit(event, data);
-    }
-    else {
-        io.emit(event, data);
-    }
+    //else {                        // SJ
+    //    io.emit(event, data);     // SJ
+    //}                             // SJ
+
 }
 
 function noConvert(value) {
